@@ -1,3 +1,3 @@
 module "ec2-aws" {
-  source = "./terraform-aws-ec2"
+  source = "../terraform-aws-ec2"
 }
