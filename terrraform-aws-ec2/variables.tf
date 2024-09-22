@@ -13,6 +13,6 @@ variable "instance_type"{
 variable "tags" {
   type = map
   default = {
-    Name = "workstation"
+    Name = "test"
   }
 }
