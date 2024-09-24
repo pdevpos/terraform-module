@@ -1,4 +1,4 @@
-output "azs" {
+output "azs_region" {
   value = data.aws_availability_zones.available
 
 }
