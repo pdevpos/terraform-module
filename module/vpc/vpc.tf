@@ -4,14 +4,14 @@ resource "aws_vpc" "main" {
   tags = merge(
     var.common_tags,
     {
-  Name = "${var.projectName}-${var.env}"
+  Name = local.tag_name
   })
   }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.projectName}-${var.env}"
+    Name = local.tag_name
   }
 }
 # check availability zones in subnets

@@ -1,6 +1,6 @@
 output "env" {
   value = var.env
 }
-output "azs"{
-  value = module.vpc_Aws.azs_region
+output "avz" {
+  value = module.vpc_Aws.avz_extr
 }
