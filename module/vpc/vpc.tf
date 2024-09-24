@@ -1,15 +1,17 @@
 resource "aws_vpc" "vpc" {
   cidr_block       = var.cidrBlock
   enable_dns_hostnames = var.dns_hostnames
-  tags = merge(
+   tags = merge(
     var.common_tags,
     {
   Name = local.tag_name
   })
+  lifecycle {
+    ignore_changes = [local.tag_name]
+  }
   }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
-
   tags = {
     Name = "${local.tag_name}-igw"
   }
