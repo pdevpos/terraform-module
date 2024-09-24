@@ -10,3 +10,4 @@ variable "common_tags"{
 variable "projectName" {}
 variable "env"{}
 variable "dns_hostnames" {}
+variable "subnet_cidr_block" {}
