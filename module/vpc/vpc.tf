@@ -14,3 +14,7 @@ resource "aws_internet_gateway" "igw" {
     Name = "${var.projectName}-${var.env}"
   }
 }
+# check availability zones in subnets
+data "aws_availability_zones" "available" {
+  state = "available"
+}
