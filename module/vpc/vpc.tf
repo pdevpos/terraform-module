@@ -6,9 +6,7 @@ resource "aws_vpc" "vpc" {
     {
   Name = local.tag_name
   })
-  lifecycle {
-    ignore_changes = [local.tag_name]
-  }
+
   }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
