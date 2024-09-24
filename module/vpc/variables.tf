@@ -9,3 +9,4 @@ variable "common_tags"{
 }
 variable "projectName" {}
 variable "env"{}
+variable "dns_hostnames" {}
