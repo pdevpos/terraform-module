@@ -16,6 +16,7 @@ resource "aws_internet_gateway" "igw" {
 }
 resource "aws_subnet" "subnet" {
   count = length(var.subnet_cidr_block)
+  availability_zone = local.avz[count.index]
   vpc_id     = aws_vpc.vpc.id
   cidr_block = var.subnet_cidr_block[count.index]
   tags = {
