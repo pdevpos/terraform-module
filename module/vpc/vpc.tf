@@ -8,20 +8,27 @@ resource "aws_vpc" "vpc" {
   })
 
   }
-# resource "aws_internet_gateway" "igw" {
-#   vpc_id = aws_vpc.vpc.id
-#   tags = {
-#     Name = "${local.tag_name}-igw"
-#   }
-# }
-# resource "aws_subnet" "public_subnet" {
-#   count = length(var.subnet_cidr_block)
-#   availability_zone = local.avz[count.index]
-#   vpc_id     = aws_vpc.vpc.id
-#   map_public_ip_on_launch = true
-# cidr_block = var.subnet_cidr_block[count.index]
-#   tags = {
-#     Name = "${local.tag_name}-subnet-${count.index}"
-#   }
-# }
-
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "${local.tag_name}-igw"
+  }
+}
+resource "aws_subnet" "public_subnet" {
+  count = length(var.subnet_cidr_block)
+  availability_zone = local.avz[count.index]
+  vpc_id     = aws_vpc.vpc.id
+  map_public_ip_on_launch = true
+cidr_block = var.subnet_cidr_block[count.index]
+  tags = {
+    Name = "${local.tag_name}-subnet-${count.index}"
+  }
+}
+resource "aws_route_table" "route_table" {
+  vpc_id = aws_vpc.vpc.id
+  tags = merge(
+    var.common_tags,
+    {
+    Name = "${local.tag_name}-public-route-table"
+  })
+}
