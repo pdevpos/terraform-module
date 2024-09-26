@@ -44,7 +44,7 @@ resource "aws_subnet" "database_subnet" {
     Name = "${local.tag_name}-database-subnet-${count.index}"
   }
 }
-# create a route table
+# create a public route table
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
   tags = merge(
@@ -53,12 +53,31 @@ resource "aws_route_table" "public_route_table" {
     Name = "${local.tag_name}-public-route-table"
   })
 }
-# create a route
-resource "aws_route" "route" {
+#create private route table
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.vpc.id
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${local.tag_name}-private-route-table"
+    })
+}
+#create a db route table
+resource "aws_route_table" "db_route_table" {
+  vpc_id = aws_vpc.vpc.id
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${local.tag_name}-db-route-table"
+    })
+}
+# create a public route
+resource "aws_route" "public_route" {
   route_table_id            = aws_route_table.public_route_table.id
   destination_cidr_block    = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.igw.id
 }
+
 # associate route table and subnets
 resource "aws_route_table_association" "route_subnet_association" {
   count = length(var.public_subnet_cidr_block)
