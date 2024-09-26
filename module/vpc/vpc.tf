@@ -6,24 +6,45 @@ resource "aws_vpc" "vpc" {
     {
   Name = local.tag_name
   })
-
-  }
+}
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${local.tag_name}-igw"
   }
 }
+# create a subnet
 resource "aws_subnet" "public_subnet" {
-  count = length(var.subnet_cidr_block)
+  count = length(var.public_subnet_cidr_block)
   availability_zone = local.avz[count.index]
   vpc_id     = aws_vpc.vpc.id
   map_public_ip_on_launch = true
-cidr_block = var.subnet_cidr_block[count.index]
+cidr_block = var.public_subnet_cidr_block[count.index]
   tags = {
-    Name = "${local.tag_name}-subnet-${count.index}"
+    Name = "${local.tag_name}-public-subnet-${count.index}"
   }
 }
+# create a private subnet
+resource "aws_subnet" "private_subnet" {
+  count = length(var.private_subnet_cidr_block)
+  availability_zone = local.avz[count.index]
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.private_subnet_cidr_block[count.index]
+  tags = {
+    Name = "${local.tag_name}-private-subnet-${count.index}"
+  }
+}
+# create a database subnet
+resource "aws_subnet" "database_subnet" {
+  count = length(var.db_subnet_cidr_block)
+  availability_zone = local.avz[count.index]
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.db_subnet_cidr_block[count.index]
+  tags = {
+    Name = "${local.tag_name}-database-subnet-${count.index}"
+  }
+}
+# create a route table
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
   tags = merge(
@@ -32,13 +53,17 @@ resource "aws_route_table" "public_route_table" {
     Name = "${local.tag_name}-public-route-table"
   })
 }
+# create a route
 resource "aws_route" "route" {
   route_table_id            = aws_route_table.public_route_table.id
   destination_cidr_block    = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.igw.id
 }
+# associate route table and subnets
 resource "aws_route_table_association" "route_subnet_association" {
-  count = length(var.subnet_cidr_block)
+  count = length(var.public_subnet_cidr_block)
   subnet_id      = element(aws_subnet.public_subnet[*],count.index).id
   route_table_id = aws_route_table.public_route_table.id
 }
+
+
