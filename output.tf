@@ -1,6 +1,3 @@
-output "env" {
-  value = var.env
-}
-output "avz" {
-  value = module.vpc_Aws.avz_extr
+output "vpc_info" {
+  value = module.vpc_mod.vpc
 }
