@@ -71,6 +71,21 @@ resource "aws_route_table" "db_route_table" {
       Name = "${local.tag_name}-db-route-table"
     })
 }
+resource "aws_eip" "elastic_ip" {
+
+}
+#create nat gateway
+resource "aws_nat_gateway" "example" {
+  allocation_id = aws_eip.elastic_ip.id
+  subnet_id     = aws_subnet.public_subnet[0].id
+  tags = {
+    Name = "nat-gw"
+  }
+
+#  To ensure proper ordering, it is recommended to add an explicit dependency
+#   on the Internet Gateway for the VPC.
+#   depends_on = [aws_internet_gateway.igw]
+}
 # create a public route
 resource "aws_route" "public_route" {
   route_table_id            = aws_route_table.public_route_table.id
