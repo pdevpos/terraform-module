@@ -2,7 +2,7 @@ resource "aws_vpc" "vpc" {
   cidr_block = var.cidr_block
 #   enable_dns_hostnames = true
   tags = {
-    Name = var.vpc_tag_name
+    Name = "expense-vpc"
   }
 }
 # resource "aws_internet_gateway" "igw" {
