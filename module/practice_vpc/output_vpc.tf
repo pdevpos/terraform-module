@@ -20,6 +20,10 @@
 #   "ipv6_netmask_length" = 0
 #   "main_route_table_id" = "rtb-044fa1af87af798ed"
 #   "owner_id" = "041445559784"
-#   "tags" = tomap(null) /* of string */
-#   "tags_all" = tomap({})
+#   "tags" = tomap({
+#     "Name" = "expense-vpc"
+#   })
+#   "tags_all" = tomap({
+#     "Name" = "expense-vpc"
+#   })
 # }
