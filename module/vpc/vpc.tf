@@ -118,8 +118,8 @@ resource "aws_route_table_association" "private_route_subnet_association" {
 }
 resource "aws_route_table_association" "db_route_subnet_association" {
   count = length(var.public_subnet_cidr_block)
-  subnet_id      = element(aws_subnet.private_subnet[*],count.index).id
-  route_table_id = aws_route_table.private_route_table.id
+  subnet_id      = element(aws_subnet.database_subnet[*],count.index).id
+  route_table_id = aws_route_table.db_route_table.id
 }
 
 
