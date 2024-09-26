@@ -26,4 +26,4 @@ resource "aws_vpc" "vpc" {
 #    tags = {
 #     Name = var.public_route_tag
 #   }
-}
+# }
