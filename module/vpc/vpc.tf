@@ -32,3 +32,7 @@ resource "aws_route_table" "route_table" {
     Name = "${local.tag_name}-public-route-table"
   })
 }
+resource "aws_route" "route" {
+  route_table_id            = aws_route_table.route_table.id
+  destination_cidr_block    = aws_internet_gateway.igw.id
+}
