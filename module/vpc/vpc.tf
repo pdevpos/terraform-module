@@ -95,13 +95,14 @@ resource "aws_route" "public_route" {
 # create a private route
 resource "aws_route" "private_route" {
   route_table_id            = aws_route_table.private_route_table.id
+  destination_cidr_block = aws_subnet.private_subnet.id
   nat_gateway_id = aws_nat_gateway.nat.id
 }
 # create a db route
-resource "aws_route" "db_route" {
-  route_table_id            = aws_route_table.db_route_table.id
-  nat_gateway_id = aws_nat_gateway.nat.id
-}
+# resource "aws_route" "db_route" {
+#   route_table_id            = aws_route_table.db_route_table.id
+#   nat_gateway_id = aws_nat_gateway.nat.id
+# }
 
 # associate route table and subnets
 resource "aws_route_table_association" "route_subnet_association" {
