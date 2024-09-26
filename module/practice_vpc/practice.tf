@@ -21,3 +21,9 @@ resource "aws_subnet" "public_subnet" {
     Name = "${var.public_subnet_tag_name}-${count.index}"
   }
 }
+resource "aws_route_table" "route_table" {
+  vpc_id = aws_vpc.vpc.id
+   tags = {
+    Name = var.public_route_tag
+  }
+}

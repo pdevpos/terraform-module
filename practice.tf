@@ -5,4 +5,5 @@ module "vpc_mod" {
   vpc_tag_name = var.vpc_tag_name
   public_subnets = var.public_subnets
   public_subnet_tag_name = var.public_subnet_tag_name
+  public_route_tag = var.route_table_tag_name
 }
