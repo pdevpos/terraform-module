@@ -63,14 +63,14 @@ resource "aws_route_table" "private_route_table" {
     })
 }
 # #create a db route table
-# resource "aws_route_table" "db_route_table" {
-#   vpc_id = aws_vpc.vpc.id
-#   tags = merge(
-#     var.common_tags,
-#     {
-#       Name = "${local.tag_name}-db-route-table"
-#     })
-# }
+resource "aws_route_table" "db_route_table" {
+  vpc_id = aws_vpc.vpc.id
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${local.tag_name}-db-route-table"
+    })
+}
 # create a public route
 resource "aws_route" "public_route" {
   route_table_id            = aws_route_table.public_route_table.id
