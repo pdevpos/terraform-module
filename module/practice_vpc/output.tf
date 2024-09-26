@@ -5,5 +5,5 @@ output "igw"{
   value = aws_internet_gateway.igw
 }
 output "av_region"{
-  value = data.aws_availability_zones.zone.names
+  value = slice(data.aws_availability_zones.zone.names,0,2)
 }
