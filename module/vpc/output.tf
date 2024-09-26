@@ -5,3 +5,6 @@ output "azs_region" {
 output "avz_extr"{
   value = local.avz
 }
+output "vpc" {
+  value = aws_vpc.vpc
+}
