@@ -12,6 +12,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 resource "aws_subnet" "public_subnet" {
+  availability_zone = local.available_region[count.index]
   count = length(var.public_subnets)
   vpc_id     = aws_vpc.vpc.id
   cidr_block = var.public_subnets[count.index]
