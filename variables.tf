@@ -1,6 +1,8 @@
-variable "vpc_cidr_block" {}
-variable "vpc_tag_name"{}
-variable "igw_name"{}
-variable "public_subnets"{}
-variable "public_subnet_tag_name"{}
-variable "route_table_tag_name"{}
+variable "env" {}
+variable "instance_type"{}
+variable "cidr_block" {}
+variable "project_name" {}
+variable "enable_dns_hostnames"{}
+variable "subnet_cidr_block"{}
+
+
