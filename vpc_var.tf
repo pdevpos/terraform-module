@@ -7,6 +7,7 @@ variable "vpc_tags" {
 }
 variable "project_name"{
   type = string
+  default = ""
 }
 variable "environment"{
   type = string

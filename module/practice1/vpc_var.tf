@@ -6,5 +6,7 @@ variable "common_tags"{
     Terraform = true
   }
 }
-variable "project_name" {}
+variable "project_name" {
+  default = "expense"
+}
 
