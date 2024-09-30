@@ -23,11 +23,11 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public_subnet" {
   count = length(var.public_subnets_cidrs)
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.public_subnets_cidrs
+  cidr_block = var.public_subnets_cidrs[count.index]
   tags = merge(
   var.common_tags,
     {
-      Name = "${local.resource_name}-public-subnet"
+      Name = "${local.resource_name}-public-subnet-${count.index}"
     }
   )
 }
