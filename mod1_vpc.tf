@@ -4,4 +4,5 @@ module "aws_vpc" {
   env = var.environment
   common_tags = var.common_tags
   project_name = var.project_name
+  public_subnets_cidrs = var.public_subnets_cidrs
 }

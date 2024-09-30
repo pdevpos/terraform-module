@@ -20,3 +20,10 @@ variable "igw_tags" {
   type = map
   default = {}
 }
+variable "public_subnets_cidrs"{
+  type = list(string)
+  validation {
+    condition = length(var.public_subnets_cidrs) == 2
+    error_message = "please provide two public subnets"
+  }
+}
