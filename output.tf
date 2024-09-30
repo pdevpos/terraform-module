@@ -10,3 +10,6 @@
 # output "vpc_info" {
 #   value = module.vpc_Aws.vpc
 # }
+output "out_avz_info" {
+  value = module.aws_vpc.avz
+}

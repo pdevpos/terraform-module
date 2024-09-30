@@ -19,3 +19,4 @@ resource "aws_internet_gateway" "igw" {
   }
   )
 }
+# check availability zone in subnets
