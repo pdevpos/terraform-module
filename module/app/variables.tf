@@ -1,1 +1,1 @@
-variable "instanceType"{}
+# variable "instanceType"{}
