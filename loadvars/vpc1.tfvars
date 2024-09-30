@@ -5,5 +5,5 @@ common_tags = {
   Project_name = "expense"
   Terraform = true
 }
-public_subnets_cidrs = ["10.0.4.0/24"]
+public_subnets_cidrs = ["10.0.4.0/24","10.0.6.0/24"]
 
