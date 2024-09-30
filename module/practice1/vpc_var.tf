@@ -3,4 +3,6 @@ variable "env"{}
 variable "common_tags"{}
 variable "project_name" {}
 variable "public_subnets_cidrs" {}
+variable "private_subnets_cidrs" {}
+variable "database_subnets_cidrs" {}
 
