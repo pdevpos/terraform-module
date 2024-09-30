@@ -13,4 +13,5 @@ variable "environment"{
 }
 variable "common_tags"{
   type = map
+  default = {}
 }
