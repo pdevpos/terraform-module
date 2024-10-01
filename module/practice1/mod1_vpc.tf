@@ -90,9 +90,51 @@ resource "aws_route_table" "db_route" {
   )
 }
 # create public route and attach igw
-resource "aws_route" "r" {
+resource "aws_route" "public_route" {
   route_table_id         = aws_route_table.public_route.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.igw.id
 }
-
+# create elastic ip address
+resource "aws_eip" "lb" {
+  domain   = "eip"
+}
+#create nat gateway
+resource "aws_nat_gateway" "nat_gw" {
+  allocation_id = aws_eip.lb.id
+  subnet_id     = aws_subnet.public_subnets[0].id
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${local.resource_name}-nat-gw"
+    }
+  )
+  depends_on = [aws_internet_gateway.igw]
+}
+# create private route and attach nat
+resource "aws_route" "private_route" {
+  route_table_id         = aws_route_table.private_route.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat_gw.id
+}
+# create db route and attach nat
+resource "aws_route" "db_route" {
+  route_table_id         = aws_route_table.db_route.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat_gw.id
+}
+# associate public subnets and public route table
+resource "aws_route_table_association" "public_assoc_route_table" {
+  subnet_id      = aws_subnet.public_subnets.id
+  route_table_id = aws_route_table.public_route.id
+}
+# associate private subnets and private route table
+resource "aws_route_table_association" "private_assoc_route_table" {
+  subnet_id      = aws_subnet.private_subnets.id
+  route_table_id = aws_route_table.private_route.id
+}
+# associate db subnets and db route table
+resource "aws_route_table_association" "db_assoc_route_table" {
+  subnet_id      = aws_subnet.database_subnets.id
+  route_table_id = aws_route_table.db_route.id
+}
