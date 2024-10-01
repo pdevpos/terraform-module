@@ -96,10 +96,10 @@ resource "aws_route" "public_route" {
   gateway_id = aws_internet_gateway.igw.id
 }
 # create elastic ip address
-resource "aws_eip" "lb" {
-#   Indicates if this EIP is for use in VPC
-  domain   = "vpc"
-}
+# resource "aws_eip" "lb" {
+# #   Indicates if this EIP is for use in VPC
+#   domain   = "vpc"
+# }
 #create nat gateway
 # resource "aws_nat_gateway" "nat_gw" {
 #   allocation_id = aws_eip.lb.id
