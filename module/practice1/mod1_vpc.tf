@@ -125,16 +125,20 @@ resource "aws_route" "db_route" {
 }
 # associate public subnets and public route table
 resource "aws_route_table_association" "public_assoc_route_table" {
-  subnet_id      = aws_subnet.public_subnets.id
+  count = length(var.public_subnets_cidrs)
+#   list have two subnets to read element one by one
+  subnet_id      = element(aws_subnet.public_subnets[*].id,count.index)
   route_table_id = aws_route_table.public_route.id
 }
 # associate private subnets and private route table
 resource "aws_route_table_association" "private_assoc_route_table" {
-  subnet_id      = aws_subnet.private_subnets.id
+  count = length(var.private_subnets_cidrs)
+  subnet_id      = element(aws_subnet.private_subnets[*].id,count.index)
   route_table_id = aws_route_table.private_route.id
 }
 # associate db subnets and db route table
 resource "aws_route_table_association" "db_assoc_route_table" {
-  subnet_id      = aws_subnet.database_subnets.id
+  count = length(var.database_subnets_cidrs)
+  subnet_id      = element(aws_subnet.database_subnets[*].id,count.index)
   route_table_id = aws_route_table.db_route.id
 }
