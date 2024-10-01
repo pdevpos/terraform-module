@@ -97,7 +97,8 @@ resource "aws_route" "public_route" {
 }
 # create elastic ip address
 resource "aws_eip" "lb" {
-  domain   = "eip"
+#   Indicates if this EIP is for use in VPC
+  domain   = "vpc"
 }
 #create nat gateway
 resource "aws_nat_gateway" "nat_gw" {
