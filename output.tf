@@ -13,3 +13,6 @@
 output "out_avz_info" {
   value = module.aws_vpc.avz
 }
+output "aws_vpc_info" {
+  value = module.aws_vpc.default_vpc
+}

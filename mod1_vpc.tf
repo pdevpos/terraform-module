@@ -7,4 +7,6 @@ module "aws_vpc" {
   public_subnets_cidrs = var.public_subnets_cidrs
   private_subnets_cidrs = var.private_subnets_cidrs
   database_subnets_cidrs = var.database_subnets_cidrs
+  is_vpc_required = true
+  target_vpc_id = var.target_vpc_id
 }

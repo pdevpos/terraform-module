@@ -41,3 +41,8 @@ variable "database_subnets_cidrs"{
     error_message = "please provide two private subnets"
   }
 }
+variable "is_vpc_required"{}
+variable "target_vpc_id"{
+  type = string
+
+}

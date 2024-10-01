@@ -101,29 +101,29 @@ resource "aws_eip" "lb" {
   domain   = "vpc"
 }
 #create nat gateway
-resource "aws_nat_gateway" "nat_gw" {
-  allocation_id = aws_eip.lb.id
-  subnet_id     = aws_subnet.public_subnets[0].id
-  tags = merge(
-    var.common_tags,
-    {
-      Name = "${local.resource_name}-nat-gw"
-    }
-  )
-  depends_on = [aws_internet_gateway.igw]
-}
+# resource "aws_nat_gateway" "nat_gw" {
+#   allocation_id = aws_eip.lb.id
+#   subnet_id     = aws_subnet.public_subnets[0].id
+#   tags = merge(
+#     var.common_tags,
+#     {
+#       Name = "${local.resource_name}-nat-gw"
+#     }
+#   )
+#   depends_on = [aws_internet_gateway.igw]
+# }
 # create private route and attach nat
-resource "aws_route" "private_route" {
-  route_table_id         = aws_route_table.private_route.id
-  destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.nat_gw.id
-}
-# create db route and attach nat
-resource "aws_route" "db_route" {
-  route_table_id         = aws_route_table.db_route.id
-  destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.nat_gw.id
-}
+# resource "aws_route" "private_route" {
+#   route_table_id         = aws_route_table.private_route.id
+#   destination_cidr_block = "0.0.0.0/0"
+#   nat_gateway_id = aws_nat_gateway.nat_gw.id
+# }
+# # create db route and attach nat
+# resource "aws_route" "db_route" {
+#   route_table_id         = aws_route_table.db_route.id
+#   destination_cidr_block = "0.0.0.0/0"
+#   nat_gateway_id = aws_nat_gateway.nat_gw.id
+# }
 # associate public subnets and public route table
 resource "aws_route_table_association" "public_assoc_route_table" {
   count = length(var.public_subnets_cidrs)
@@ -143,3 +143,11 @@ resource "aws_route_table_association" "db_assoc_route_table" {
   subnet_id      = element(aws_subnet.database_subnets[*].id,count.index)
   route_table_id = aws_route_table.db_route.id
 }
+# peer connection
+# resource "aws_vpc_peering_connection" "vpc_peer" {
+#   count = var.is_vpc_required ? 1 : 0
+#
+#   peer_owner_id = var.peer_owner_id
+#   peer_vpc_id   = var.target_vpc_id == "" ? // target
+#   vpc_id        = aws_vpc.vpc.id  // requestor vpc id
+# }
