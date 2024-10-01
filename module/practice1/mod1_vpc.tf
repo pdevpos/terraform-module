@@ -143,7 +143,7 @@ resource "aws_route_table_association" "db_assoc_route_table" {
   subnet_id      = element(aws_subnet.database_subnets[*].id,count.index)
   route_table_id = aws_route_table.db_route.id
 }
-#peer connection
+#peer connection between two vpc's
 resource "aws_vpc_peering_connection" "vpc_peer" {
   count = var.is_vpc_required ? 1 : 0
   peer_vpc_id   = var.target_vpc_id == "" ? data.aws_vpc.selected.id : var.target_vpc_id// target
@@ -152,4 +152,10 @@ resource "aws_vpc_peering_connection" "vpc_peer" {
   tags = {
     Name = "VPC-peer"
   }
+}
+# peer connection between route table and another vpc cidr
+resource "aws_route" "public_route" {
+  destination_cidr_block = data.aws_vpc.selected.id
+  route_table_id         = aws_vpc.vpc.main_route_table_id
+  
 }
