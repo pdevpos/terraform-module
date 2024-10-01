@@ -143,11 +143,13 @@ resource "aws_route_table_association" "db_assoc_route_table" {
   subnet_id      = element(aws_subnet.database_subnets[*].id,count.index)
   route_table_id = aws_route_table.db_route.id
 }
-# peer connection
-# resource "aws_vpc_peering_connection" "vpc_peer" {
-#   count = var.is_vpc_required ? 1 : 0
-#
-#   peer_owner_id = var.peer_owner_id
-#   peer_vpc_id   = var.target_vpc_id == "" ? // target
-#   vpc_id        = aws_vpc.vpc.id  // requestor vpc id
-# }
+#peer connection
+resource "aws_vpc_peering_connection" "vpc_peer" {
+  count = var.is_vpc_required ? 1 : 0
+  peer_vpc_id   = var.target_vpc_id == "" ? data.aws_vpc.selected.id : var.target_vpc_id// target
+  vpc_id        = aws_vpc.vpc.id  // requestor vpc id
+  auto_accept   = true
+  tags = {
+    Name = "VPC-peer"
+  }
+}
