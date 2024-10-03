@@ -6,4 +6,6 @@
 # }
 module "frontend" {
   source = "./module/provisioner"
+  protocol_type = "ssh"
+  instance_type = "t3.micro"
 }

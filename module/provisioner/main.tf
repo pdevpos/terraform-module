@@ -1,6 +1,6 @@
 resource "aws_instance" "instance" {
-  ami           = "ami-09c813fb71547fc4f"
-  instance_type = "t3.micro"
+  ami           = data.aws_ami.ami.image_id
+  instance_type = var.instance_type
   instance_market_options {
         market_type = "spot"
         spot_options {
@@ -10,9 +10,9 @@ resource "aws_instance" "instance" {
   }
   provisioner "remote-exec" {
     connection {
-      type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
+      type     = var.protocol_type
+      user     = var.ssh_user
+      password = var.ssh_password
       host     = self.public_ip
     }
     inline = [
