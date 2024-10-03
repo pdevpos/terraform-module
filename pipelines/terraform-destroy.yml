@@ -24,5 +24,4 @@ pipelines:
             test-job:
               timeout: 0
               tasks:
-                - exec: { command: terraform, arguments: ["init","-backend-config=dev-state/state.tfvars"], run_if: passed }
                 - exec: { command: terraform, arguments: ["destroy","-var-file=dev-state/main.tfvars","-auto-approve"], run_if: passed }
