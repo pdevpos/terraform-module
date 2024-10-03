@@ -49,8 +49,8 @@ resource "null_resource" "provisioner" {
 }
 resource "aws_route53_record" "hostzone" {
   name    = "${var.component}-${var.env}"
-  type    = "A"
-  zone_id = "Z09583601MY3QCL7AJKBT"
+  type    = var.route_record_type
+  zone_id = var.zone_id
   records = [aws_instance.instance.private_ip]
 }
 

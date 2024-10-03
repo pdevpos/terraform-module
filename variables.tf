@@ -30,3 +30,11 @@ variable "component" {
   type = string
   default = ""
 }
+variable "zone_id" {
+  type = string
+  default = ""
+}
+variable "record_type" {
+  type = string
+  default = ""
+}
