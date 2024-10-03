@@ -1,6 +1,13 @@
 resource "aws_instance" "instance" {
   ami           = "ami-09c813fb71547fc4f"
   instance_type = "t3.micro"
+  instance_market_options {
+        market_type = "spot"
+        spot_options {
+          spot_instance_type = "persistent"
+          instance_interruption_behavior = "stop"
+        }
+  }
   provisioner "remote-exec" {
     connection {
       type     = "ssh"

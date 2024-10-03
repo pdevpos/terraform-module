@@ -1,3 +1,3 @@
-output "instance_info" {
-  value = aws_instance.instance
+output "data_ami" {
+  value = data.aws_ami.ami
 }

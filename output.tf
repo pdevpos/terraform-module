@@ -17,5 +17,5 @@
 #   value = module.aws_vpc.default_vpc
 # }
 output "info" {
-  value = module.frontend.instance_info
+  value = module.frontend.data_ami
 }
