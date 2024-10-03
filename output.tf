@@ -20,4 +20,10 @@
 #   value = module.frontend.data_ami
 # }
 
+output "ssh_user" {
+  value = module.frontend
+}
+output "zone_id" {
+  value = module.frontend.info
+}
 
