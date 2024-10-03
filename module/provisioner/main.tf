@@ -33,6 +33,9 @@ resource "aws_instance" "instance" {
       instance_interruption_behavior = "stop"
     }
   }
+  tags = {
+    Name = "${var.component}-${var.env}"
+  }
 }
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
@@ -52,5 +55,6 @@ resource "aws_route53_record" "hostzone" {
   type    = var.route_record_type
   zone_id = var.zone_id
   records = [aws_instance.instance.private_ip]
+  ttl = 300
 }
 
