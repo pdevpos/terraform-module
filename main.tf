@@ -4,3 +4,6 @@
 #   projectName = var.project_name
 #
 # }
+module "frontend" {
+  source = "./module/provisioner"
+}

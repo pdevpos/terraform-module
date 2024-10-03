@@ -16,3 +16,6 @@
 # output "aws_vpc_info" {
 #   value = module.aws_vpc.default_vpc
 # }
+output "info" {
+  value = module.frontend.instance_info
+}
