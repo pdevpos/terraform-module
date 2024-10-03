@@ -43,7 +43,7 @@ resource "null_resource" "provisioner" {
       host     = aws_instance.instance.public_ip
     }
     inline = [
-      "dnf install nginx -y"
+      "sudo dnf install nginx -y"
     ]
   }
 }
