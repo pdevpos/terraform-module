@@ -7,7 +7,7 @@ pipelines:
     display_order: -1
     materials:
       git-2ae7d73:
-        git: https://github.com/pdevops/terraform-module.git
+        git: https://github.com/pdevpos/terraform-module.git
         shallow_clone: false
         auto_update: true
         branch: main
