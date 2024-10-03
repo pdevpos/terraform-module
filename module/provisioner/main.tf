@@ -47,3 +47,10 @@ resource "null_resource" "provisioner" {
     ]
   }
 }
+resource "aws_route53_record" "hostzone" {
+  name    = "${var.component}-${var.env}"
+  type    = "A"
+  zone_id = "Z09583601MY3QCL7AJKBT"
+  records = [aws_instance.instance.private_ip]
+}
+

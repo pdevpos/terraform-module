@@ -10,4 +10,6 @@ module "frontend" {
   instance_type = "t3.micro"
   ssh_user = var.ssh_user
   ssh_password = var.ssh_password
+  component = "frontend"
+  env = "dev"
 }

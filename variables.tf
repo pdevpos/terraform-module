@@ -8,7 +8,10 @@
 # variable "db_subnet_cidr_block"{}
 
 
-variable "env"{}
+variable "env"{
+  type = string
+  default = ""
+}
 variable "protocol_type" {
   type = string
   default = ""
@@ -20,6 +23,10 @@ variable "ssh_password" {
   type = string
 }
 variable "instance_type" {
+  type = string
+  default = ""
+}
+variable "component" {
   type = string
   default = ""
 }
