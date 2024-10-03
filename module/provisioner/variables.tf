@@ -1,12 +1,4 @@
-variable "protocol_type" {
-  type = string
-}
-variable "ssh_user" {
-  type = string
-}
-variable "ssh_password" {
-  type = string
-}
-variable "instance_type" {
-  type = string
-}
+variable "protocol_type" {}
+variable "instance_type" {}
+variable "ssh_user" {}
+variable "ssh_password" {}

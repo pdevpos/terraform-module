@@ -8,4 +8,6 @@ module "frontend" {
   source = "./module/provisioner"
   protocol_type = "ssh"
   instance_type = "t3.micro"
+  ssh_user = var.ssh_user
+  ssh_password = var.ssh_password
 }

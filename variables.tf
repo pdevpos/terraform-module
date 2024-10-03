@@ -11,6 +11,7 @@
 variable "env"{}
 variable "protocol_type" {
   type = string
+  default = ""
 }
 variable "ssh_user" {
   type = string
@@ -20,4 +21,5 @@ variable "ssh_password" {
 }
 variable "instance_type" {
   type = string
+  default = ""
 }
