@@ -13,3 +13,9 @@
 module "module-name"{
 source = "./path from where to get source code"
 * }
+
+*depends_on:
+============
+* earlier three modules can run at a time , parallel all modules start to execute so here some credentials will not able to get in a proper order.
+* so which module can execute first and then execute other modules.
+* we can use depends_on argument. depends_on argument to create explicit dependencies between resources and modules in Terraform. 

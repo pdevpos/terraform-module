@@ -21,7 +21,7 @@ pipelines:
             type: manual
             allow_only_on_success: false
           jobs:
-            terraform-job:
+            terraform-destroy:
               timeout: 0
               tasks:
                 - exec: { command: terraform, arguments: ["destroy","-var-file=dev-state/main.tfvars","-auto-approve"], run_if: passed }
